@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse 
 
 conf = {
     "title": "Guia Mei Manaus",
@@ -7,8 +8,7 @@ conf = {
 
 app = FastAPI(**conf)
 
-@app.get('/')
-def home():
-    return {
-        "message":"deu certo"
-    }
+@app.get('/guia-pdf', tags=["files"])
+def pdf():
+    file_path = "files/guia.pdf"
+    return FileResponse(file_path)
